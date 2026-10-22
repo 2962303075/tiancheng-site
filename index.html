@@ -61,25 +61,30 @@
   /* ===== 下载区 ===== */
   #downloads{background:linear-gradient(180deg,var(--bg) 0%,var(--bg2) 100%)}
   .dl-grid{display:grid;gap:20px}
-  .dl-card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:24px;display:flex;flex-direction:column;gap:16px;transition:border-color .15s ease,transform .15s ease}
-  .dl-card:hover{border-color:#5a4430}
-  .dl-card.featured{background:linear-gradient(160deg,#2A1C10 0%,#231609 100%);border-color:#6a4a1e}
+  .dl-card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:24px;display:flex;flex-direction:column;gap:16px;transition:border-color .15s ease,transform .15s ease,box-shadow .15s ease}
+  .dl-card:hover{border-color:#5a4430;transform:translateY(-2px);box-shadow:0 12px 32px rgba(0,0,0,.28)}
+  .dl-card.featured{background:linear-gradient(160deg,#2A1C10 0%,#231609 100%);border-color:#6a4a1e;box-shadow:0 12px 32px rgba(0,0,0,.30)}
+  .dl-card.featured:hover{border-color:#8a6230}
   .dl-card .top{display:flex;align-items:flex-start;justify-content:space-between;gap:10px}
   .dl-card h3{font-size:18px;font-weight:700;display:flex;align-items:center;gap:10px}
   .dl-card h3 .os{width:26px;height:26px;flex:none}
+  .dl-card h3 .os-wrap{width:38px;height:38px;flex:none;border-radius:11px;background:linear-gradient(135deg,rgba(255,122,26,.20),rgba(255,78,26,.08));border:1px solid rgba(255,122,26,.25);display:flex;align-items:center;justify-content:center}
+  .dl-card h3 .os-wrap .os{width:20px;height:20px}
   .badge{font-size:11.5px;font-weight:600;padding:3px 9px;border-radius:999px;background:linear-gradient(135deg,var(--orange),var(--orange2));color:#fff;white-space:nowrap}
   .badge-new{background:linear-gradient(135deg,#58C15A,#2E9E4C);color:#fff}
   .dl-card .desc{color:var(--sub);font-size:13.5px;min-height:40px}
-  .dl-card .meta{display:flex;gap:14px;font-size:12.5px;color:var(--dim)}
+  .dl-card .meta{display:flex;gap:14px;font-size:12.5px;color:var(--dim);flex-wrap:wrap}
   .dl-card .meta span{display:inline-flex;align-items:center;gap:5px}
   .dl-card .meta svg{width:13px;height:13px}
   .dl-card .actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:auto}
   .arch{font-size:12px;color:var(--dim);margin-top:14px;padding-top:12px;border-top:1px dashed var(--line)}
-  .arch .row{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:5px 0;flex-wrap:wrap}
+  .arch .row{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:6px 0;flex-wrap:wrap}
   .arch .row b{color:var(--sub);font-weight:600}
-  .arch a{color:var(--amber);font-weight:600;font-size:12.5px}
-  .arch a:hover{text-decoration:underline}
-  .arch .hint{font-size:12px;color:var(--dim);margin-top:6px}
+  .arch a{display:inline-flex;align-items:center;gap:5px;color:var(--amber);font-weight:600;font-size:12.5px;padding:5px 12px;border:1px solid rgba(255,122,26,.35);border-radius:9px;transition:background .12s ease,border-color .12s ease}
+  .arch a:hover{text-decoration:none;background:rgba(255,122,26,.12);border-color:var(--amber)}
+  .arch .row.hot a{background:linear-gradient(135deg,var(--orange),var(--orange2));color:#fff;border-color:transparent}
+  .arch .row.hot a:hover{background:linear-gradient(135deg,#ff8a3a,#ff5a22)}
+  .arch .hint{font-size:12px;color:var(--dim);margin-top:8px}
   .dl-note{text-align:center;color:var(--dim);font-size:12.5px;margin-top:22px}
 
   /* ===== 特性 ===== */
@@ -149,10 +154,6 @@
       <a href="#features">功能</a>
       <a href="#changelog">更新</a>
       <a href="#faq">帮助</a>
-      <a class="gh-link" href="https://github.com/2962303075/zhenguojian-win-macos" target="_blank" rel="noopener">
-        <svg viewBox="0 0 24 24" width="15" height="15" fill="currentColor" aria-hidden="true"><path d="M12 .5A11.5 11.5 0 0 0 .5 12a11.5 11.5 0 0 0 7.86 10.91c.58.1.79-.25.79-.56v-2.17c-3.2.7-3.87-1.38-3.87-1.38-.52-1.33-1.28-1.68-1.28-1.68-1.04-.71.08-.7.08-.7 1.15.08 1.76 1.18 1.76 1.18 1.02 1.76 2.69 1.25 3.35.96.1-.75.4-1.25.72-1.54-2.56-.29-5.25-1.28-5.25-5.7 0-1.26.45-2.29 1.18-3.1-.12-.29-.51-1.46.11-3.05 0 0 .96-.31 3.16 1.18a10.9 10.9 0 0 1 5.76 0c2.2-1.49 3.16-1.18 3.16-1.18.62 1.59.23 2.76.11 3.05.73.81 1.18 1.84 1.18 3.1 0 4.43-2.7 5.4-5.27 5.69.41.36.78 1.06.78 2.14v3.17c0 .31.2.66.8.55A11.5 11.5 0 0 0 23.5 12 11.5 11.5 0 0 0 12 .5Z"/></svg>
-        GitHub
-      </a>
     </nav>
   </div>
 </header>
@@ -173,7 +174,6 @@
       </div>
       <div class="cta-row">
         <a class="btn btn-primary btn-lg" href="#downloads">查看下载</a>
-        <a class="btn btn-ghost btn-lg" href="https://github.com/2962303075/zhenguojian-win-macos/releases" target="_blank" rel="noopener">GitHub Releases</a>
       </div>
     </div>
   </section>
@@ -184,7 +184,7 @@
       <div class="sec-head">
         <div class="kicker">DOWNLOAD</div>
         <h2>选择你的平台</h2>
-        <p>当前版本 0.2.76+84 · 全部安装包托管在 GitHub Releases</p>
+        <p>当前版本 0.2.76+84 · 全部安装包免登录即可下载</p>
       </div>
 
       <div class="dl-grid">
@@ -192,23 +192,24 @@
         <!-- Windows 安装版（推荐） -->
         <article class="dl-card featured">
           <div class="top">
-            <h3><svg class="os" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3 5.5 10.8 4.6v6.9H3V5.5ZM3 17.9l7.8 1V12.6H3v5.3ZM11.5 11.8v6.3l9.5 1.4v-7.7h-9.5ZM11.5 4.2v7.2h9.5V3.9L11.5 4.2Z"/></svg>Windows 一键安装版</h3>
+            <h3><span class="os-wrap"><svg class="os" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3 5.5 10.8 4.6v6.9H3V5.5ZM3 17.9l7.8 1V12.6H3v5.3ZM11.5 11.8v6.3l9.5 1.4v-7.7h-9.5ZM11.5 4.2v7.2h9.5V3.9L11.5 4.2Z"/></svg></span>Windows 一键安装版</h3>
             <span class="badge">推荐</span>
           </div>
           <p class="desc">双击安装，自动创建桌面与开始菜单快捷方式。适合大多数电脑用户。</p>
           <div class="meta">
             <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/><path d="M12 7v5l3 3"/></svg>约 90 MB</span>
             <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>Win10 / Win11</span>
+            <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v12m0 0 4-4m-4 4-4-4"/><path d="M4 19h16"/></svg>v0.2.76</span>
           </div>
           <div class="actions">
-            <a class="btn btn-primary btn-md" href="https://alist.29sml.cn/s/y08ng7w8">下载安装版</a>
+            <a class="btn btn-primary btn-md" href="https://alist.29sml.cn/s/y08ng7w8"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 3v12m0 0 4.5-4.5M12 15 7.5 10.5"/><path d="M5 19h14"/></svg>下载安装版</a>
           </div>
         </article>
 
         <!-- Windows 绿色版 -->
         <article class="dl-card">
           <div class="top">
-            <h3><svg class="os" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3 5.5 10.8 4.6v6.9H3V5.5ZM3 17.9l7.8 1V12.6H3v5.3ZM11.5 11.8v6.3l9.5 1.4v-7.7h-9.5ZM11.5 4.2v7.2h9.5V3.9L11.5 4.2Z"/></svg>Windows 绿色版</h3>
+            <h3><span class="os-wrap"><svg class="os" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3 5.5 10.8 4.6v6.9H3V5.5ZM3 17.9l7.8 1V12.6H3v5.3ZM11.5 11.8v6.3l9.5 1.4v-7.7h-9.5ZM11.5 4.2v7.2h9.5V3.9L11.5 4.2Z"/></svg></span>Windows 绿色版</h3>
           </div>
           <p class="desc">解压即用，无需安装。适合便携使用与 IT 环境受限的设备。</p>
           <div class="meta">
@@ -216,21 +217,21 @@
             <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>解压即用</span>
           </div>
           <div class="actions">
-            <a class="btn btn-ghost btn-md" href="https://alist.29sml.cn/s/WovOrcmC">下载 ZIP</a>
+            <a class="btn btn-ghost btn-md" href="https://alist.29sml.cn/s/WovOrcmC"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 3v12m0 0 4.5-4.5M12 15 7.5 10.5"/><path d="M5 19h14"/></svg>下载 ZIP</a>
           </div>
         </article>
 
         <!-- Android -->
-        <article class="dl-card featured" style="background:linear-gradient(160deg,#2A1C10 0%,#231609 100%);border-color:#6a4a1e">
+        <article class="dl-card featured">
           <div class="top">
-            <h3><svg class="os" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6.2 8.5h11.6c.2 1.5.1 2.9-.2 4.1l.7 7.4c0 .3-.2.5-.5.5h-1.5a.5.5 0 0 1-.5-.5l-.5-5H8.7l-.5 5a.5.5 0 0 1-.5.5H6.2a.5.5 0 0 1-.5-.5l.7-7.4a13 13 0 0 1-.2-4.1Z"/><circle cx="9" cy="6.2" r="1.8"/><circle cx="15" cy="6.2" r="1.8"/></svg>Android 手机 / 电视</h3>
+            <h3><span class="os-wrap"><svg class="os" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6.2 8.5h11.6c.2 1.5.1 2.9-.2 4.1l.7 7.4c0 .3-.2.5-.5.5h-1.5a.5.5 0 0 1-.5-.5l-.5-5H8.7l-.5 5a.5.5 0 0 1-.5.5H6.2a.5.5 0 0 1-.5-.5l.7-7.4a13 13 0 0 1-.2-4.1Z"/><circle cx="9" cy="6.2" r="1.8"/><circle cx="15" cy="6.2" r="1.8"/></svg></span>Android 手机 / 电视</h3>
             <span class="badge-new">已适配 TV</span>
           </div>
           <p class="desc">手机与安卓电视通用，安装后自动识别电视模式，遥控器可操作。</p>
           <div class="arch">
-            <div class="row"><b>主流手机 / 电视盒子（推荐）</b><a href="https://alist.29sml.cn/s/GuhrG3Oi">下载 arm64-v8a · 32 MB</a></div>
-            <div class="row"><b>老旧 32 位设备</b><a href="https://alist.29sml.cn/s/p7IzTf2P">下载 armeabi-v7a · 41 MB</a></div>
-            <div class="row"><b>安卓模拟器</b><a href="https://alist.29sml.cn/s/4JLKQO3v">下载 x86_64 · 34 MB</a></div>
+            <div class="row hot"><b>主流手机 / 电视盒子（推荐）</b><a href="https://alist.29sml.cn/s/GuhrG3Oi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M12 3v12m0 0 4.5-4.5M12 15 7.5 10.5"/><path d="M5 19h14"/></svg>下载 arm64-v8a · 32 MB</a></div>
+            <div class="row"><b>老旧 32 位设备</b><a href="https://alist.29sml.cn/s/p7IzTf2P"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M12 3v12m0 0 4.5-4.5M12 15 7.5 10.5"/><path d="M5 19h14"/></svg>下载 armeabi-v7a · 41 MB</a></div>
+            <div class="row"><b>安卓模拟器</b><a href="https://alist.29sml.cn/s/4JLKQO3v"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M12 3v12m0 0 4.5-4.5M12 15 7.5 10.5"/><path d="M5 19h14"/></svg>下载 x86_64 · 34 MB</a></div>
             <p class="hint">不确定选哪个：近三年手机与电视盒子选 arm64-v8a；电视安装可用 U 盘或 adb，详见下方帮助。</p>
           </div>
         </article>
@@ -238,7 +239,7 @@
         <!-- macOS -->
         <article class="dl-card">
           <div class="top">
-            <h3><svg class="os" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 3c-2 2-2 5 0 7 2 2 5 2 7 0 2-2 2-5 0-7-2-2-5-2-7 0z"/><path d="M12 3c-2-2-5-2-7 0-2 2-2 5 0 7 2 2 5 2 7 0-2-2-2-5 0-7z"/></svg>macOS</h3>
+            <h3><span class="os-wrap"><svg class="os" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 3c-2 2-2 5 0 7 2 2 5 2 7 0 2-2 2-5 0-7-2-2-5-2-7 0z"/><path d="M12 3c-2-2-5-2-7 0-2 2-2 5 0 7 2 2 5 2 7 0-2-2-2-5 0-7z"/></svg></span>macOS</h3>
             <span class="badge-new">Universal</span>
           </div>
           <p class="desc">Apple 芯片与 Intel 芯片通用，解压后拖入应用程序即可。</p>
@@ -247,11 +248,11 @@
             <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>M1 / Intel</span>
           </div>
           <div class="actions">
-            <a class="btn btn-ghost btn-md" href="https://alist.29sml.cn/s/uGpsJv9y">下载 ZIP</a>
+            <a class="btn btn-ghost btn-md" href="https://alist.29sml.cn/s/uGpsJv9y"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 3v12m0 0 4.5-4.5M12 15 7.5 10.5"/><path d="M5 19h14"/></svg>下载 ZIP</a>
           </div>
         </article>
       </div>
-      <p class="dl-note">下载链接由蓝奏云优享版提供，免登录即可下载；源码同步托管于 <a style="color:var(--amber)" href="https://github.com/2962303075/zhenguojian-win-macos/releases" target="_blank" rel="noopener">GitHub Releases</a></p>
+      <p class="dl-note">下载链接由蓝奏云优享版提供，免登录即可下载</p>
     </div>
   </section>
 
@@ -356,10 +357,6 @@
 </main>
 
 <footer>
-  <div class="links">
-    <a href="https://github.com/2962303075/zhenguojian-win-macos" target="_blank" rel="noopener">GitHub 仓库</a>
-    <a href="https://github.com/2962303075/zhenguojian-win-macos/releases" target="_blank" rel="noopener">全部版本</a>
-  </div>
   <p>甜橙短剧 · 免费开源短剧客户端 · 本站仅为个人项目下载页</p>
 </footer>
 
