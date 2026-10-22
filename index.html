@@ -111,7 +111,6 @@
 
   /* ===== 教程 ===== */
   .tut-grid{display:grid;grid-template-columns:1fr;gap:24px;max-width:840px;margin:0 auto;align-items:center}
-  .tut-video video{width:100%;border-radius:18px;border:1px solid var(--line);background:#000;display:block;aspect-ratio:16/9;box-shadow:0 12px 32px rgba(0,0,0,.30)}
   .tut-steps{display:flex;flex-direction:column;gap:14px}
   .tut-step{display:flex;gap:14px;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px 18px;align-items:flex-start;transition:border-color .15s ease}
   .tut-step:hover{border-color:#5a4430}
@@ -119,7 +118,7 @@
   .tut-txt h3{font-size:15px;font-weight:700}
   .tut-txt p{color:var(--sub);font-size:13px;margin-top:3px}
   @media (min-width:900px){
-    .tut-grid{grid-template-columns:1.15fr 1fr;gap:28px;max-width:980px}
+    .tut-grid{max-width:840px}
   }
 
   /* ===== FAQ ===== */
@@ -274,6 +273,24 @@
             <a class="btn btn-ghost btn-md" href="https://alist.29sml.cn/s/rVOGhyVq"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 3v12m0 0 4.5-4.5M12 15 7.5 10.5"/><path d="M5 19h14"/></svg>下载 ZIP</a>
           </div>
         </article>
+
+        <!-- iOS -->
+        <article class="dl-card">
+          <div class="top">
+            <h3><span class="os-wrap"><svg class="os" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6 2h12a2 2 0 0 1 2 2v16a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2Z"/><path d="M9 18h6"/></svg></span>iOS（iPhone / iPad）</h3>
+            <span class="badge">自签安装</span>
+          </div>
+          <p class="desc">官方红果/真果版 iOS 安装包（未签名），下载后用工具自签即可安装到 iPhone / iPad。</p>
+          <div class="meta">
+            <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/><path d="M12 7v5l3 3"/></svg>30 MB</span>
+            <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>iOS 15.1+</span>
+            <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v12m0 0 4-4m-4 4-4-4"/><path d="M4 19h16"/></svg>v0.2.79</span>
+          </div>
+          <div class="actions">
+            <a class="btn btn-ghost btn-md" href="https://alist.29sml.cn/s/ukvJFcmt"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 3v12m0 0 4.5-4.5M12 15 7.5 10.5"/><path d="M5 19h14"/></svg>下载 iOS 安装包</a>
+          </div>
+          <p class="hint">未签名包无法直接安装：用爱思助手 / AltStore / Sideloadly + 你的 Apple ID 签名后即可安装。</p>
+        </article>
       </div>
       <p class="dl-note">下载链接由蓝奏云优享版提供，免登录即可下载</p>
     </div>
@@ -316,12 +333,6 @@
         <p>一分钟学会看剧：下载安装 → 打开选源 → 搜索播放</p>
       </div>
       <div class="tut-grid">
-        <div class="tut-video">
-          <video controls preload="metadata" playsinline poster="assets/app-icon.png">
-            <source src="assets/tutorial.mp4" type="video/mp4">
-            您的浏览器不支持视频播放，可下载安装包后直接体验。
-          </video>
-        </div>
         <div class="tut-steps">
           <div class="tut-step">
             <span class="tut-num">1</span>
