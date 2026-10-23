@@ -192,7 +192,19 @@
   #wxqq-copied.show{display:block}
   #wxqq-mask .guide{margin:16px 0 0;font-size:13px;color:rgba(255,255,255,.62)}
   #wxqq-mask .guide b{color:#ffb35c}
+  /* 智能设备推荐提示 */
+  .dl-tip{display:flex;align-items:center;gap:10px;margin:0 0 18px;padding:12px 16px;border-radius:12px;background:rgba(255,154,61,.12);border:1px solid rgba(255,154,61,.25);color:#ffd9b0;font-size:14px;line-height:1.6}
+  .dl-tip[hidden]{display:none}
+  .dl-tip b{color:#ffb35c}
+  .dl-card.recommend{outline:2px solid #ff8a2b;outline-offset:2px}
+  .badge-reco{display:inline-block;background:#ff8a2b;color:#fff;font-size:11px;font-weight:700;padding:2px 9px;border-radius:6px;margin-left:8px;vertical-align:middle}
+  /* 二维码扫码下载 */
+  .qr-wrap{display:none;flex-direction:column;align-items:center;gap:10px;margin:26px auto 0;padding:20px 24px;border-radius:14px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);max-width:300px;text-align:center}
+  .qr-wrap.show{display:flex}
+  .qr-wrap canvas{background:#fff;border-radius:8px;padding:6px}
+  .qr-wrap p{font-size:13px;color:rgba(255,255,255,.72);margin:0}
 </style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 </head>
 <body>
 
@@ -249,6 +261,8 @@
         <h2>选择你的平台</h2>
         <p>全部安装包免登录即可下载，电视端同样适用</p>
       </div>
+
+      <div id="dl-tip" class="dl-tip" hidden></div>
 
       <div class="dl-grid">
 
@@ -321,7 +335,7 @@
             <h3><span class="os-wrap"><svg class="os" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6 2h12a2 2 0 0 1 2 2v16a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2Z"/><path d="M9 18h6"/></svg></span>iOS（iPhone / iPad）</h3>
             <span class="badge">自签安装</span>
           </div>
-          <p class="desc">官方红果/真果版 iOS 安装包（未签名），下载后用工具自签即可安装到 iPhone / iPad。</p>
+          <p class="desc">甜橙短剧 iOS 安装包（未签名，已替换甜橙图标与应用名），下载后用工具自签即可安装到 iPhone / iPad。</p>
           <div class="meta">
             <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/><path d="M12 7v5l3 3"/></svg>30 MB</span>
             <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>iOS 15.1+</span>
@@ -334,6 +348,7 @@
         </article>
       </div>
       <p class="dl-note">下载链接由蓝奏云优享版提供，免登录即可下载</p>
+      <div id="qr-wrap" class="qr-wrap"><div id="qr-box"></div><p>手机扫码访问官网，自动匹配你的设备版本</p></div>
     </div>
   </section>
 
@@ -557,6 +572,67 @@
         document.body.removeChild(ta); done();
       }
     });
+  }
+
+  /* 设备检测 + 智能推荐下载 */
+  function detectDevice(){
+    var ua = navigator.userAgent;
+    if (/Android/i.test(ua)) return 'android';
+    if (/iPhone|iPad|iPod/i.test(ua)) return 'ios';
+    if (/Macintosh|Mac OS X/i.test(ua)) return 'macos';
+    if (/Windows/i.test(ua)) return 'windows';
+    return 'windows';
+  }
+  var dev = detectDevice();
+  var devNames = {android:'Android / 电视', ios:'iOS', windows:'Windows', macos:'macOS'};
+  var recoNames = {android:'Android 手机 / 电视版', ios:'iOS 安装包', windows:'Windows 一键安装版', macos:'macOS 版'};
+  var tip = document.getElementById('dl-tip');
+  if (tip){
+    tip.innerHTML = '检测到你在使用 <b>' + (devNames[dev] || 'Windows') + '</b>，推荐下载 <b>' + (recoNames[dev] || 'Windows 一键安装版') + '</b>';
+    tip.removeAttribute('hidden');
+  }
+  var recoMark = dev === 'ios' ? /iOS/ : dev === 'macos' ? /macOS/ : dev === 'android' ? /Android/ : /Windows/;
+  var cards = document.querySelectorAll('.dl-card');
+  Array.prototype.forEach.call(cards, function(c){
+    var t = c.querySelector('h3') ? c.querySelector('h3').textContent : '';
+    if (recoMark.test(t)){
+      c.classList.add('recommend');
+      var top = c.querySelector('.top');
+      if (top && !top.querySelector('.badge-reco')){
+        top.insertAdjacentHTML('beforeend', '<span class="badge-reco">适合你</span>');
+      }
+    }
+  });
+
+  /* 下载点击统计（上报 stats-server） */
+  function trackDownload(platform){
+    var id = localStorage.getItem('tc_did');
+    if (!id){ id = 'tc_' + Math.random().toString(36).slice(2,10); try{ localStorage.setItem('tc_did', id); }catch(e){} }
+    try{
+      fetch('http://36.212.212.170:8090/track', {
+        method:'POST',
+        headers:{'Content-Type':'application/json'},
+        body: JSON.stringify({device_id:id, platform:platform, version:'site', event:'download'})
+      }).catch(function(){});
+    }catch(e){}
+  }
+  Array.prototype.forEach.call(document.querySelectorAll('.dl-grid a, .dl-card a'), function(a){
+    a.addEventListener('click', function(){
+      var card = a.closest('.dl-card');
+      var pl = card && card.querySelector('h3') ? (card.querySelector('h3').textContent || '').trim() : 'other';
+      var short = pl.replace(/（.*）|\(.*\)/g, '').trim();
+      trackDownload(short.split(/[\/ ]/)[0] || short || 'other');
+    });
+  });
+
+  /* 桌面端显示扫码二维码 */
+  if (!/Android|iPhone|iPad|Mobile/i.test(navigator.userAgent)){
+    var qw = document.getElementById('qr-wrap');
+    var qb = document.getElementById('qr-box');
+    if (qw && qb && window.QRCode){
+      qw.classList.add('show');
+      new QRCode(qb, { text: location.href, width: 180, height: 180, colorDark: '#0b0d10', colorLight: '#ffffff' });
+    }
   }
 })();
 </script>
