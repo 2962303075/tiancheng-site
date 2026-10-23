@@ -196,8 +196,9 @@
   .dl-tip{display:flex;align-items:center;gap:10px;margin:0 0 18px;padding:12px 16px;border-radius:12px;background:rgba(255,154,61,.12);border:1px solid rgba(255,154,61,.25);color:#ffd9b0;font-size:14px;line-height:1.6}
   .dl-tip[hidden]{display:none}
   .dl-tip b{color:#ffb35c}
-  .dl-card.recommend{outline:2px solid #ff8a2b;outline-offset:2px}
-  .badge-reco{display:inline-block;background:#ff8a2b;color:#fff;font-size:11px;font-weight:700;padding:2px 9px;border-radius:6px;margin-left:8px;vertical-align:middle}
+  .dl-card.recommend{outline:none;border-color:rgba(255,148,60,.62);box-shadow:0 0 0 1px rgba(255,148,60,.45), 0 0 0 5px rgba(255,148,60,.14), 0 18px 46px rgba(255,148,60,.12)}
+  .dl-card.recommend::before{background:linear-gradient(90deg,transparent,var(--orange),transparent);opacity:.9}
+  .badge-reco{display:inline-block;background:linear-gradient(135deg,var(--orange),var(--orange2));color:#fff;font-size:11px;font-weight:700;padding:2px 10px;border-radius:999px;margin-left:8px;vertical-align:middle;box-shadow:0 3px 10px rgba(255,90,30,.3)}
   /* 二维码扫码下载 */
   .qr-wrap{display:none;flex-direction:column;align-items:center;gap:10px;margin:26px auto 0;padding:20px 24px;border-radius:14px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);max-width:300px;text-align:center}
   .qr-wrap.show{display:flex}
@@ -603,6 +604,15 @@
       }
     }
   });
+
+  /* 把推荐主推卡移到下载区第一位 */
+  var grid = document.querySelector('.dl-grid');
+  if (grid){
+    var primary = grid.querySelector('.dl-card.recommend');
+    if (primary && grid.firstElementChild !== primary){
+      grid.insertBefore(primary, grid.firstElementChild);
+    }
+  }
 
   /* 下载点击统计（上报 stats-server） */
   function trackDownload(platform){
