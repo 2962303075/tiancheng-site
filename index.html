@@ -180,9 +180,31 @@
     .rv{opacity:1;transform:none;transition:none}
     .btn-primary::after{display:none}
   }
+  /* 微信 / QQ 内置浏览器打开提示 */
+  #wxqq-mask{position:fixed;inset:0;z-index:9999;display:none;align-items:center;justify-content:center;background:rgba(10,10,14,.93);backdrop-filter:blur(8px);padding:24px;font-family:"PingFang SC","Microsoft YaHei",system-ui,sans-serif}
+  #wxqq-mask.show{display:flex}
+  #wxqq-mask .wxqq-box{max-width:340px;width:100%;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.13);border-radius:18px;padding:30px 24px;text-align:center;color:#fff}
+  #wxqq-mask h2{margin:0 0 12px;font-size:20px;font-weight:700}
+  #wxqq-mask p{margin:0 0 18px;font-size:14px;line-height:1.7;color:rgba(255,255,255,.8)}
+  #wxqq-mask .btn-copy{display:block;width:100%;padding:13px;border:0;border-radius:12px;background:linear-gradient(135deg,#ff9a3c,#ff5f00);color:#fff;font-size:15px;font-weight:700;cursor:pointer;transition:transform .15s}
+  #wxqq-mask .btn-copy:active{transform:scale(.97)}
+  #wxqq-copied{display:none;margin:12px 0 0;font-size:12px;color:#7fe0a0}
+  #wxqq-copied.show{display:block}
+  #wxqq-mask .guide{margin:16px 0 0;font-size:13px;color:rgba(255,255,255,.62)}
+  #wxqq-mask .guide b{color:#ffb35c}
 </style>
 </head>
 <body>
+
+<div id="wxqq-mask" role="alertdialog" aria-modal="true" aria-hidden="true">
+  <div class="wxqq-box">
+    <h2>请用浏览器打开</h2>
+    <p>当前是在微信 / QQ 内打开，受平台限制无法直接下载安装包。<br>请复制链接到手机浏览器打开。</p>
+    <button class="btn-copy" id="wxqq-copy">复制下载链接</button>
+    <div id="wxqq-copied">链接已复制，请在浏览器地址栏粘贴打开</div>
+    <p class="guide">也可点击右上角 <b>···</b> 选择「在浏览器打开」</p>
+  </div>
+</div>
 
 <header>
   <div class="wrap nav">
@@ -510,6 +532,31 @@
     Array.prototype.forEach.call(rvs, function(el){ io.observe(el); });
   } else {
     Array.prototype.forEach.call(rvs, function(el){ el.classList.add('in'); });
+  }
+
+  /* 微信 / QQ 内置浏览器提示用外部浏览器打开 */
+  var mask = document.getElementById('wxqq-mask');
+  var ua = navigator.userAgent;
+  var inApp = /MicroMessenger/i.test(ua) || /MQQBrowser/i.test(ua) || /QQ\//i.test(ua);
+  if (inApp && mask){
+    mask.classList.add('show');
+    mask.setAttribute('aria-hidden','false');
+  }
+  var copyBtn = document.getElementById('wxqq-copy');
+  if (copyBtn){
+    copyBtn.addEventListener('click', function(){
+      var url = location.href;
+      var done = function(){ var c = document.getElementById('wxqq-copied'); if(c) c.classList.add('show'); };
+      if (navigator.clipboard && navigator.clipboard.writeText){
+        navigator.clipboard.writeText(url).then(done, done);
+      } else {
+        var ta = document.createElement('textarea');
+        ta.value = url; ta.style.position='fixed'; ta.style.opacity='0';
+        document.body.appendChild(ta); ta.select();
+        try { document.execCommand('copy'); } catch(e){}
+        document.body.removeChild(ta); done();
+      }
+    });
   }
 })();
 </script>
