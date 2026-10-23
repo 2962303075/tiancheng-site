@@ -62,28 +62,29 @@
   /* ===== 下载区 ===== */
   #downloads{background:linear-gradient(180deg,var(--bg) 0%,var(--bg2) 100%)}
   .dl-grid{display:grid;gap:20px}
-  .dl-card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:24px;display:flex;flex-direction:column;gap:16px;transition:border-color .15s ease,transform .15s ease,box-shadow .15s ease}
-  .dl-card:hover{border-color:#5a4430;transform:translateY(-2px);box-shadow:0 12px 32px rgba(0,0,0,.28)}
+  .dl-card{background:linear-gradient(180deg,var(--card) 0%,var(--card2) 100%);border:1px solid var(--line);border-radius:20px;padding:26px;display:flex;flex-direction:column;gap:16px;position:relative;overflow:hidden;transition:border-color .15s ease,transform .15s ease,box-shadow .15s ease}
+  .dl-card::before{content:"";position:absolute;top:0;left:20px;right:20px;height:1px;background:linear-gradient(90deg,transparent,rgba(255,180,58,.35),transparent)}
+  .dl-card:hover{border-color:#5a4430;transform:translateY(-2px);box-shadow:0 14px 34px rgba(0,0,0,.32)}
   .dl-card.featured{background:linear-gradient(160deg,#2A1C10 0%,#231609 100%);border-color:#6a4a1e;box-shadow:0 12px 32px rgba(0,0,0,.30)}
   .dl-card.featured:hover{border-color:#8a6230}
   .dl-card .top{display:flex;align-items:flex-start;justify-content:space-between;gap:10px}
-  .dl-card h3{font-size:18px;font-weight:700;display:flex;align-items:center;gap:10px}
+  .dl-card h3{font-size:18px;font-weight:700;display:flex;align-items:center;gap:12px}
   .dl-card h3 .os{width:26px;height:26px;flex:none}
-  .dl-card h3 .os-wrap{width:38px;height:38px;flex:none;border-radius:11px;background:linear-gradient(135deg,rgba(255,122,26,.20),rgba(255,78,26,.08));border:1px solid rgba(255,122,26,.25);display:flex;align-items:center;justify-content:center}
-  .dl-card h3 .os-wrap .os{width:20px;height:20px}
-  .badge{font-size:11.5px;font-weight:600;padding:3px 9px;border-radius:999px;background:linear-gradient(135deg,var(--orange),var(--orange2));color:#fff;white-space:nowrap}
+  .dl-card h3 .os-wrap{width:40px;height:40px;flex:none;border-radius:12px;background:linear-gradient(135deg,rgba(255,122,26,.22),rgba(255,78,26,.10));border:1px solid rgba(255,122,26,.28);display:flex;align-items:center;justify-content:center}
+  .dl-card h3 .os-wrap .os{width:21px;height:21px}
+  .badge{font-size:11.5px;font-weight:600;padding:4px 10px;border-radius:999px;background:linear-gradient(135deg,var(--orange),var(--orange2));color:#fff;white-space:nowrap;flex:none;margin-top:2px}
   .badge-new{background:linear-gradient(135deg,#58C15A,#2E9E4C);color:#fff}
   .dl-card .desc{color:var(--sub);font-size:13.5px;min-height:40px}
-  .dl-card .meta{display:flex;gap:14px;font-size:12.5px;color:var(--dim);flex-wrap:wrap}
-  .dl-card .meta span{display:inline-flex;align-items:center;gap:5px}
-  .dl-card .meta svg{width:13px;height:13px}
+  .dl-card .meta{display:flex;gap:8px;font-size:12px;color:var(--dim);flex-wrap:wrap}
+  .dl-card .meta span{display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.05);padding:5px 11px;border-radius:999px;color:var(--sub)}
+  .dl-card .meta svg{width:13px;height:13px;color:var(--orange)}
   .dl-card .actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:auto}
-  .arch{font-size:12px;color:var(--dim);margin-top:14px;padding-top:12px;border-top:1px dashed var(--line)}
-  .arch .row{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:6px 0;flex-wrap:wrap}
+  .arch{font-size:12px;color:var(--dim);margin-top:16px;padding-top:14px;border-top:1px dashed var(--line)}
+  .arch .row{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:7px 0;flex-wrap:wrap}
   .arch .row b{color:var(--sub);font-weight:600}
-  .arch a{display:inline-flex;align-items:center;gap:5px;color:var(--amber);font-weight:600;font-size:12.5px;padding:5px 12px;border:1px solid rgba(255,122,26,.35);border-radius:9px;transition:background .12s ease,border-color .12s ease}
+  .arch a{display:inline-flex;align-items:center;gap:6px;color:var(--amber);font-weight:600;font-size:12.5px;padding:6px 13px;border:1px solid rgba(255,122,26,.35);border-radius:9px;background:rgba(255,122,26,.06);transition:background .12s ease,border-color .12s ease}
   .arch a svg{width:12px;height:12px;flex:none}
-  .arch a:hover{text-decoration:none;background:rgba(255,122,26,.12);border-color:var(--amber)}
+  .arch a:hover{text-decoration:none;background:rgba(255,122,26,.16);border-color:var(--amber)}
   .arch .row.hot a{background:linear-gradient(135deg,var(--orange),var(--orange2));color:#fff;border-color:transparent}
   .arch .row.hot a:hover{background:linear-gradient(135deg,#ff8a3a,#ff5a22)}
   .arch .hint{font-size:12px;color:var(--dim);margin-top:8px}
@@ -147,20 +148,6 @@
   .nav-links a.active{color:var(--txt)}
   .nav-links a.active::after{transform:scaleX(1)}
 
-  /* ===== Hero 播放预览 ===== */
-  .hero-show{display:flex;justify-content:center;margin-top:38px}
-  .hs-frame{width:234px;background:#0F0A06;border:1px solid var(--line);border-radius:22px;padding:11px 11px 0;box-shadow:0 26px 70px rgba(0,0,0,.5);transform:perspective(1000px) rotateX(3deg) rotate(.4deg);position:relative}
-  .hs-bar{display:flex;justify-content:space-between;align-items:center;font-size:10.5px;color:var(--dim);padding:0 4px 9px;font-variant-numeric:tabular-nums}
-  .hs-bar b{color:var(--amber);font-size:11.5px;font-weight:700}
-  .hs-screen{border-radius:13px;overflow:hidden;border:1px solid rgba(255,255,255,.06)}
-  .hs-poster{aspect-ratio:9/16;background:linear-gradient(165deg,#FFC45C 0%,#FF7A1A 42%,#FF4E1A 70%,#6E1605 100%);position:relative;display:flex;align-items:center;justify-content:center}
-  .hs-poster::after{content:"";position:absolute;inset:0;background:radial-gradient(circle at 30% 18%,rgba(255,255,255,.28),transparent 55%)}
-  .hs-play{position:relative;z-index:1;width:56px;height:56px;border-radius:50%;background:rgba(0,0,0,.42);backdrop-filter:blur(4px);display:flex;align-items:center;justify-content:center;color:#fff;box-shadow:0 8px 24px rgba(0,0,0,.35);transition:transform .15s ease}
-  .hs-play svg{width:22px;height:22px;margin-left:4px}
-  .hs-ep{position:absolute;left:10px;right:10px;bottom:10px;z-index:1;font-size:11px;color:#fff;background:rgba(0,0,0,.45);padding:6px 9px;border-radius:9px;text-align:center;letter-spacing:.5px}
-  .hs-progress{height:4px;background:#2A1C10;border-radius:4px;margin:10px 2px 12px;overflow:hidden}
-  .hs-progress i{display:block;height:100%;width:46%;background:linear-gradient(90deg,var(--orange),var(--orange2));border-radius:4px}
-
   /* ===== 响应式 ===== */
   @media (max-width:767px){
     .dl-card{padding:20px}
@@ -216,18 +203,6 @@
       </div>
       <div class="cta-row">
         <a class="btn btn-primary btn-lg" href="#downloads">查看下载</a>
-      </div>
-      <div class="hero-show" aria-hidden="true">
-        <div class="hs-frame">
-          <div class="hs-bar"><b>甜橙短剧</b><span>1080P · 自动续播</span></div>
-          <div class="hs-screen">
-            <div class="hs-poster">
-              <span class="hs-play"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span>
-              <span class="hs-ep">逆袭小甜心 · 第 12 集</span>
-            </div>
-          </div>
-          <div class="hs-progress"><i></i></div>
-        </div>
       </div>
     </div>
   </section>
